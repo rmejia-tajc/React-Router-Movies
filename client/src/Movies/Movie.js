@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React, { Component } from "react";
+import axios from "axios";
 
-import MovieCard from './MovieCard';
+import MovieCard from "./MovieCard.js";
 
 export default class Movie extends Component {
   constructor(props) {
@@ -28,31 +28,45 @@ export default class Movie extends Component {
       });
   };
   // Uncomment this code when you're ready for the stretch problems
-  // componentWillReceiveProps(newProps){
-  //   if(this.props.match.params.id !== newProps.match.params.id){
-  //     this.fetchMovie(newProps.match.params.id);
-  //   }
-  // }
+  componentWillReceiveProps(newProps) {
+    if (this.props.match.params.id !== newProps.match.params.id) {
+      this.fetchMovie(newProps.match.params.id);
+    }
+  }
 
-  // saveMovie = () => {
-  //   const addToSavedList = this.props.addToSavedList;
-  //   addToSavedList(this.state.movie)
-  // }
+  saveMovie = () => {
+    const addToSavedList = this.props.addToSavedList;
+    addToSavedList(this.state.movie);
+  };
 
   render() {
     if (!this.state.movie) {
       return <div>Loading movie information...</div>;
     }
 
-    const { movie } = this.state;
+    const movie = this.state.movie;
     return (
-
       <div className="save-wrapper">
+        <div className="movie-card">
+          <MovieCard movie={movie} />
+          {/* <h2>{title}</h2>
+          <div className="movie-director">
+            Director: <em>{director}</em>
+          </div>
+          <div className="movie-metascore">
+            Metascore: <strong>{metascore}</strong>
+          </div>
+          <h3>Actors</h3>
 
-        <MovieCard movie={movie} />
-
-        <div className="save-button">Save</div>
-
+          {stars.map(star => (
+            <div key={star} className="movie-star">
+              {star}
+            </div>
+          ))} */}
+        </div>
+        <div onClick={() => this.saveMovie()} className="save-button">
+          Save
+        </div>
       </div>
     );
   }
